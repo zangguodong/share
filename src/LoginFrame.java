@@ -2,6 +2,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.InetAddress;
+import java.net.Socket;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -104,42 +109,25 @@ public class LoginFrame extends JFrame {
     }
 
     class searchClusterAction implements ActionListener {
-        private String serializeClientList(List<Client> cli) {
-            StringBuilder bu = new StringBuilder(Math.max(cli.size() * 10, 20));
-            cli.stream().forEach((k -> {
-                bu.append(k.getIpAddr()).append("#").append(k.getBaseContent()).append("@");
-            }));
-            bu.deleteCharAt(bu.length() - 1);
-            return bu.toString();
-        }
-
-        private Map<String, String> derializeClientList(String s) {
-            String[] strs = s.split("@");
-            Map<String, String> map = new HashMap<>();
-            for (int i = 0; i < strs.length; i += 2) {
-                map.put(strs[0], strs[1]);
-            }
-            return map;
-        }
-
         @Override
         public void actionPerformed(ActionEvent e) {
             String ip = JOptionPane.showInputDialog("输入目标节点IP", "192.168.1.120");
             try {
-//                InetAddress target = InetAddress.getByName(ip);
-//                Socket socket = new Socket(target.getHostAddress(), 7500);
-//                if (socket.isConnected()) {
-//                    socket.getOutputStream().write("association request".getBytes());
-//                    socket.getOutputStream().flush();
-//                }
-//                socket.shutdownOutput();
-//                InputStream in = socket.getInputStream();
-//                BufferedReader bf = new BufferedReader(new InputStreamReader(in));
-//                String s;
-//                while ((s = bf.readLine()) != null) {
-//                    System.out.println(s);
-//                }
-
+                InetAddress target = InetAddress.getByName(ip);
+                Socket socket;
+                if ((socket = me.getSocketMap().get(ip)) != null) {
+                    socket = new Socket(target.getHostAddress(), 7500);
+                    if (socket.isConnected()) me.getSocketMap().put(ip, socket);
+                }
+                socket.getOutputStream().write(EFunction.SearchGroup.name().getBytes());
+                socket.getOutputStream().flush();
+                socket.shutdownOutput();
+                InputStream in = socket.getInputStream();
+                BufferedReader bf = new BufferedReader(new InputStreamReader(in));
+                String s;
+                while ((s = bf.readLine()) != null) {
+                    System.out.println(s);
+                }
             } catch (Exception e1) {
                 JOptionPane.showMessageDialog(null, "IP格式错误");
                 actionPerformed(e);
