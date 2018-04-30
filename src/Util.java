@@ -1,6 +1,8 @@
 import java.net.InetAddress;
 import java.net.NetworkInterface;
+import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.List;
 
 public class Util {
     public static InetAddress getLocalHostLANAddress() throws Exception {
@@ -33,4 +35,7 @@ public class Util {
         }
         return null;
     }
+    public static void main(String[] args) throws Exception{
+    }
+
 }

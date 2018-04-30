@@ -73,7 +73,6 @@ class ClusterPanel extends JPanel {
                 butt.addActionListener(new expandClusterAction(c));
                 ScrollPanel.this.add(butt);
                 ScrollPanel.this.add(login);
-
             }
         }
     }

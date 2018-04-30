@@ -3,5 +3,7 @@ public enum EFunction {
     pong,//TCP
     probe,//UDP
     probeRes,//UDP
-    update//TCP
+    update,//TCP
+    SearchGroup,//TCP
+    Unknown
 }
