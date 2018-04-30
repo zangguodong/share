@@ -1,8 +1,6 @@
 import java.net.InetAddress;
 import java.net.NetworkInterface;
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.List;
+import java.util.*;
 
 public class Util {
     public static InetAddress getLocalHostLANAddress() throws Exception {
@@ -35,7 +33,25 @@ public class Util {
         }
         return null;
     }
-    public static void main(String[] args) throws Exception{
+
+    public static void main(String[] args) throws Exception {
     }
 
+    public static String serializeClientList(List<Client> cli) {
+        StringBuilder bu = new StringBuilder(Math.max(cli.size() * 10, 20));
+        cli.stream().forEach((k -> {
+            bu.append(k.getIpAddr()).append("#").append(k.getBaseContent()).append("@");
+        }));
+        bu.deleteCharAt(bu.length() - 1);
+        return bu.toString();
+    }
+
+    public static Map<String, String> derializeClientList(String s) {
+        String[] strs = s.split("@");
+        Map<String, String> map = new HashMap<>();
+        for (int i = 0; i < strs.length; i += 2) {
+            map.put(strs[0], strs[1]);
+        }
+        return map;
+    }
 }

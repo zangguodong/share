@@ -32,9 +32,7 @@ public class ClientEntry {
         me.setClusterName(fakeC.getClusterName());
         LoginFrame lf = new LoginFrame(me);
         me.setLf(lf);
-        SwingUtilities.invokeLater(() -> {
-            lf.showLoginFrame();
-        });
+        SwingUtilities.invokeLater(lf::showLoginFrame);
 
     }
 

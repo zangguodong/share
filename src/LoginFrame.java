@@ -2,9 +2,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.InetAddress;
+import java.net.Socket;
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class LoginFrame extends JFrame {
     public Client me;
@@ -52,13 +59,14 @@ public class LoginFrame extends JFrame {
                 me.setClusterName(c.getClusterName());
                 me.setCluster(c);
                 c.setCreateTime(LocalDateTime.now());
-                List<Client> list = Arrays.asList(me);
+                Map<String, String> map = new HashMap<>();
+                map.put(me.getIpAddr(), me.getBaseContent());
                 c.getLoginList().add(me);
                 try {
-                    HostListJFrame hf = new HostListJFrame();
+                    HostListJFrame hf = new HostListJFrame(me);
                     SwingUtilities.invokeLater(() -> {
                         try {
-                            hf.showClusterContent(list);
+                            hf.showClusterContent(map);
                         } catch (Exception e1) {
                             e1.printStackTrace();
                         }
@@ -85,10 +93,14 @@ public class LoginFrame extends JFrame {
                 return;
             }
             List<Client> list = c.getLoginList();
+            Map<String, String> map = new HashMap<>();
+            list.stream().forEach(ma -> {
+                map.put(ma.getIpAddr(), ma.getBaseContent());
+            });
             try {
-                hf = new HostListJFrame();
+                hf = new HostListJFrame(me);
                 SwingUtilities.invokeLater(() -> {
-                    hf.showClusterContent(list);
+                    hf.showClusterContent(map);
                 });
             } catch (Exception e1) {
                 e1.printStackTrace();
@@ -97,25 +109,25 @@ public class LoginFrame extends JFrame {
     }
 
     class searchClusterAction implements ActionListener {
-
         @Override
         public void actionPerformed(ActionEvent e) {
             String ip = JOptionPane.showInputDialog("输入目标节点IP", "192.168.1.120");
             try {
-//                InetAddress target = InetAddress.getByName(ip);
-//                Socket socket = new Socket(target.getHostAddress(), 7500);
-//                if (socket.isConnected()) {
-//                    socket.getOutputStream().write("association request".getBytes());
-//                    socket.getOutputStream().flush();
-//                }
-//                socket.shutdownOutput();
-//                InputStream in = socket.getInputStream();
-//                BufferedReader bf = new BufferedReader(new InputStreamReader(in));
-//                String s;
-//                while ((s = bf.readLine()) != null) {
-//                    System.out.println(s);
-//                }
-
+                InetAddress target = InetAddress.getByName(ip);
+                Socket socket;
+                if ((socket = me.getSocketMap().get(ip)) != null) {
+                    socket = new Socket(target.getHostAddress(), 7500);
+                    if (socket.isConnected()) me.getSocketMap().put(ip, socket);
+                }
+                socket.getOutputStream().write(EFunction.SearchGroup.name().getBytes());
+                socket.getOutputStream().flush();
+                socket.shutdownOutput();
+                InputStream in = socket.getInputStream();
+                BufferedReader bf = new BufferedReader(new InputStreamReader(in));
+                String s;
+                while ((s = bf.readLine()) != null) {
+                    System.out.println(s);
+                }
             } catch (Exception e1) {
                 JOptionPane.showMessageDialog(null, "IP格式错误");
                 actionPerformed(e);

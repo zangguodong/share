@@ -7,7 +7,8 @@ public class Test {
         ServerSocket server = new ServerSocket(7500);
         while (true) {
             Socket s = server.accept();
-            new Thread(new TCPServerSocketHandler(null,s)).start();
+            System.out.println("accept connection from " + s.getInetAddress().getHostAddress());
+            new Thread(new TCPServerSocketHandler(null, s)).start();
         }
     }
 
