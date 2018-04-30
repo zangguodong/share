@@ -111,11 +111,11 @@ public class LoginFrame extends JFrame {
     class searchClusterAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            String ip = JOptionPane.showInputDialog("输入目标节点IP", "192.168.1.120");
+            String ip = JOptionPane.showInputDialog("输入目标节点IP", "192.168.1.104");
             try {
                 InetAddress target = InetAddress.getByName(ip);
                 Socket socket;
-                if ((socket = me.getSocketMap().get(ip)) != null) {
+                if ((socket = me.getSocketMap().getOrDefault(ip, null)) == null) {
                     socket = new Socket(target.getHostAddress(), 7500);
                     if (socket.isConnected()) me.getSocketMap().put(ip, socket);
                 }
@@ -128,9 +128,10 @@ public class LoginFrame extends JFrame {
                 while ((s = bf.readLine()) != null) {
                     System.out.println(s);
                 }
+                bf.close();
             } catch (Exception e1) {
                 JOptionPane.showMessageDialog(null, "IP格式错误");
-                actionPerformed(e);
+                System.out.println(e1.getMessage());
             }
         }
     }
