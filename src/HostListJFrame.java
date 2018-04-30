@@ -2,7 +2,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -127,13 +129,17 @@ class ListClientPanel extends JPanel {
                         Client me = vj.getS();
                         me.setBaseContent(jta.getText());
                         String mainHost = me.getCluster().getHost();
+                        System.out.println("mainHost " + mainHost);
                         Socket s;
                         try {
                             if ((s = me.getSocketMap().get(mainHost)) == null) {
-                                s = new Socket(InetAddress.getByName(mainHost), 5000);
+                                s = new Socket(InetAddress.getByName(mainHost), 7500);
                             }
-                            s.getOutputStream().write(("update#" + jta.getText()).getBytes());
-                            s.getOutputStream().flush();
+                            BufferedWriter bw=new BufferedWriter(new OutputStreamWriter(s.getOutputStream()));
+                            bw.write("update#" + jta.getText());
+                            bw.flush();
+                            bw.close();
+                            System.out.println("we send data " + "update#" + jta.getText() + " to " + s.getInetAddress().getHostName());
                         } catch (Exception e1) {
                             e1.printStackTrace();
                         }
