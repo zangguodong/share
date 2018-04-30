@@ -2,6 +2,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.*;
 import java.util.List;
 
@@ -10,11 +14,13 @@ public class HostListJFrame extends JFrame {
     public HostListJFrame() throws Exception {
     }
 
+    private ListClientPanel lp;
+
     public void showClusterContent(List<Client> list) {
-        HostListJFrame mj = null;
+        HostListJFrame mj;
         try {
             mj = new HostListJFrame();
-            ListClientPanel lp = new ListClientPanel(list);
+            lp = new ListClientPanel(list);
             mj.add(lp);
             mj.setSize(400, 500);
             mj.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -23,6 +29,11 @@ public class HostListJFrame extends JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void updatePanel(String ip, String text) {
+
+        this.lp.update(ip, text);
     }
 
     public static void main(String arg[]) throws Exception {
@@ -63,12 +74,11 @@ class ListClientPanel extends JPanel {
 
     }
 
-    public void update(Client c, String text) {
-        c.setBaseContent(text);
-        ipLabelmap.get(c.getIpAddr()).setText("<html><body>" + c.getIpAddr() + "<br>" + "<br>"
-                + c.getBaseContent().substring(0, Math.min(10, c.getBaseContent().length())) + "..."
+    public void update(String ip, String text) {
+        //c.setBaseContent(text);
+        ipLabelmap.get(ip).setText("<html><body>" + ip + "<br>" + "<br>"
+                + text.substring(0, Math.min(10, text.length())) + "..."
                 + "<body></html>");
-//        ipButtonmap.get(c.getIpAddr()).update(c.getBaseContent());
     }
 
     private class viewJButton extends JButton {
@@ -116,9 +126,20 @@ class ListClientPanel extends JPanel {
                         viewJButton vj = ipButtonmap.get(ip);
                         Client me = vj.getS();
                         me.setBaseContent(jta.getText());
-                        System.out.println(me.getIpAddr() + " text change to " + me.getBaseContent());
-                        // vj.update(me.getBaseContent());
+                        String mainHost = me.getCluster().getHost();
+                        Socket s;
+                        try {
+                            if ((s = me.getSocketMap().get(mainHost)) == null) {
+                                s = new Socket(InetAddress.getByName(mainHost), 5000);
+                            }
+                            s.getOutputStream().write(("update#" + jta.getText()).getBytes());
+                            s.getOutputStream().flush();
+                        } catch (Exception e1) {
+                            e1.printStackTrace();
+                        }
                         //TODO notify all other host
+
+
                     });
                     jp.add(button, BorderLayout.SOUTH);
                 } else {

@@ -1,12 +1,9 @@
+import org.codehaus.jackson.map.ObjectMapper;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.net.InetAddress;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.net.UnknownHostException;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
@@ -14,6 +11,9 @@ import java.util.List;
 public class LoginFrame extends JFrame {
     public Client me;
 
+    public void updateHostListPanel(String ip, String cont) {
+        if (this.hf != null) hf.updatePanel(ip, cont);
+    }
 
     public LoginFrame(Client me) {
         this.me = me;
@@ -50,7 +50,7 @@ public class LoginFrame extends JFrame {
             if (Cname == null) {
             } else if (Cname.trim().length() > 0) {
                 Cluster c = new Cluster(Cname);
-                c.setHost(me);
+                c.setHost(me.getIpAddr());
                 me.setClusterName(c.getClusterName());
                 me.setCluster(c);
                 c.setCreateTime(LocalDateTime.now());
@@ -75,6 +75,8 @@ public class LoginFrame extends JFrame {
         }
     }
 
+    HostListJFrame hf;
+
     class checkClusterAction implements ActionListener {
 
         @Override
@@ -86,7 +88,7 @@ public class LoginFrame extends JFrame {
             }
             List<Client> list = c.getLoginList();
             try {
-                HostListJFrame hf = new HostListJFrame();
+                hf = new HostListJFrame();
                 SwingUtilities.invokeLater(() -> {
                     hf.showClusterContent(list);
                 });
@@ -100,23 +102,26 @@ public class LoginFrame extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String ip = JOptionPane.showInputDialog("输入目标节点IP");
+            String ip = JOptionPane.showInputDialog("输入目标节点IP", "192.168.1.120");
             try {
-                InetAddress target=InetAddress.getByName(ip);
-                //ServerSocket socket=me.getServerSocket();
-                Socket socket=new Socket(target.getHostAddress(),7500);
-                if(socket.isConnected()) {
-                    socket.getOutputStream().write("连接请求".getBytes());
-                }
-            } catch (UnknownHostException e1) {
+//                InetAddress target = InetAddress.getByName(ip);
+//                Socket socket = new Socket(target.getHostAddress(), 7500);
+//                if (socket.isConnected()) {
+//                    socket.getOutputStream().write("association request".getBytes());
+//                    socket.getOutputStream().flush();
+//                }
+//                socket.shutdownOutput();
+//                InputStream in = socket.getInputStream();
+//                BufferedReader bf = new BufferedReader(new InputStreamReader(in));
+//                String s;
+//                while ((s = bf.readLine()) != null) {
+//                    System.out.println(s);
+//                }
+
+            } catch (Exception e1) {
                 JOptionPane.showMessageDialog(null, "IP格式错误");
                 actionPerformed(e);
-            } catch (IOException e1) {
-                e1.printStackTrace();
             }
         }
     }
 }
-
-
-

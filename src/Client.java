@@ -1,27 +1,46 @@
 import java.io.IOException;
 import java.net.DatagramSocket;
 import java.net.ServerSocket;
-import java.net.SocketException;
-import java.time.LocalDateTime;
+import java.net.Socket;
+import java.util.HashMap;
+import java.util.Map;;
 
 public class Client {
     private String ipAddr;
     private int port;
-    private String baseContent="u can copy this";
+    private String baseContent = "u can copy this";
     private String FilePrev;
-    private LocalDateTime createTime;
-    private String ClusterName="";
+    private String ClusterName = "";
     private Cluster Cluster;
-    private DatagramSocket datagramSocket=new DatagramSocket(5000);
-    private ServerSocket serverSocket=new ServerSocket(7500);
+    private DatagramSocket datagramSocket;
+    private ServerSocket serverSocket;
+    private boolean host = false;
+    private LoginFrame lf;
+    private Map<String, Socket> socketMap = new HashMap<>();
 
     public Client() throws IOException {
+    }
+
+    public void init() throws IOException {
+        datagramSocket = new DatagramSocket(5000);
+        serverSocket = new ServerSocket(7500);
+        new Thread(() -> {
+            while (true) {
+                try {
+                    Socket s = serverSocket.accept();
+                    System.out.println("get connect from " + s.getInetAddress().getHostAddress());
+                    new Thread(new TCPServerSocketHandler(Client.this, s)).start();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }).start();
     }
 
     public Client(String ip, String base) throws IOException {
         this.ipAddr = ip;
         this.baseContent = base;
-        this.createTime = LocalDateTime.now();
     }
 
     public String getIpAddr() {
@@ -56,14 +75,6 @@ public class Client {
         FilePrev = filePrev;
     }
 
-    public LocalDateTime getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(LocalDateTime createTime) {
-        this.createTime = createTime;
-    }
-
     public String getClusterName() {
         return ClusterName;
     }
@@ -86,5 +97,25 @@ public class Client {
 
     public ServerSocket getServerSocket() {
         return serverSocket;
+    }
+
+    public boolean isHost() {
+        return host;
+    }
+
+    public void setHost(boolean host) {
+        this.host = host;
+    }
+
+    public LoginFrame getLf() {
+        return lf;
+    }
+
+    public void setLf(LoginFrame lf) {
+        this.lf = lf;
+    }
+
+    public Map<String, Socket> getSocketMap() {
+        return socketMap;
     }
 }

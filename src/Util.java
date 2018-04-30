@@ -1,6 +1,11 @@
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.type.JavaType;
+
 import java.net.InetAddress;
 import java.net.NetworkInterface;
+import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.List;
 
 public class Util {
     public static InetAddress getLocalHostLANAddress() throws Exception {
@@ -32,5 +37,16 @@ public class Util {
             e.printStackTrace();
         }
         return null;
+    }
+    public static final ObjectMapper mapper = new ObjectMapper();
+    public static void main(String[] args) throws Exception{
+        String str="[{\"ipAddr\":\"192.168.1.102\",\"port\":0,\"baseContent\":\"hello you\",\"filePrev\":null,\"clusterName\":\"\"},{\"ipAddr\":\"192.168.1.103\",\"port\":0,\"baseContent\":\"i am not ok\",\"filePrev\":null,\"clusterName\":\"\"}]";
+        JavaType javaType = getCollectionType(ArrayList.class, Client.class);
+        List<Client> lst =  (List<Client>)mapper.readValue(str, javaType);
+        System.out.println(lst.size());
+    }
+
+    public static JavaType getCollectionType(Class<?> collectionClass, Class<?>... elementClasses) {
+        return mapper.getTypeFactory().constructParametricType(collectionClass, elementClasses);
     }
 }

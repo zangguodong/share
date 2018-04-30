@@ -1,8 +1,11 @@
+import org.codehaus.jackson.map.ObjectMapper;
+
 import javax.swing.*;
 import java.io.IOException;
 import java.net.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Timer;
 
@@ -17,7 +20,20 @@ public class ClientEntry {
         //5000 port to probe
         ClientEntry en = new ClientEntry();
         Client me = en.initClient();
-        LoginFrame lf=new LoginFrame(me);
+        me.setBaseContent("are you ok?");
+        Cluster fakeC = new Cluster("maybe good");
+        Client ck = new Client("192.168.1.103", "what do you want");
+        ck.setCluster(fakeC);
+        ck.setClusterName(fakeC.getClusterName());
+        ck.setHost(false);
+        List<Client> fakeList = Arrays.asList(ck,
+                new Client("192.168.1.120", "i dont want anything"), me);
+        fakeC.getLoginList().addAll(fakeList);
+        fakeC.setHost(me.getIpAddr());
+        me.setCluster(fakeC);
+        me.setClusterName(fakeC.getClusterName());
+        LoginFrame lf = new LoginFrame(me);
+        me.setLf(lf);
         SwingUtilities.invokeLater(() -> {
             lf.showLoginFrame();
         });
@@ -39,8 +55,9 @@ public class ClientEntry {
     public Client initClient() throws Exception {
         Client c = new Client();
         c.setIpAddr(Util.getLocalHostLANAddress().getHostAddress());
-        c.setCreateTime(LocalDateTime.now());
-        c.setPort(7500);
+        // c.setCreateTime(LocalDateTime.now());
+        c.setPort(5000);
+        c.init();
         return c;
     }
 

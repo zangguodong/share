@@ -1,3 +1,4 @@
+import java.net.InetAddress;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +9,7 @@ public class Cluster {
 
     private List<Client> loginList = new ArrayList<Client>();
 
-    private Client host;
+    private String host;
 
     private LocalDateTime createTime;
 
@@ -26,12 +27,12 @@ public class Cluster {
     }
 
 
-    public Client getHost() {
+    public String getHost() {
         return host;
     }
 
-    public void setHost(Client onHost) {
-        this.host = onHost;
+    public void setHost(String host) {
+        this.host = host;
     }
 
     public LocalDateTime getCreateTime() {
