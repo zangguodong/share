@@ -22,18 +22,6 @@ public class ClientEntry {
             lf.showLoginFrame();
         });
 
-//        me.setClusterName("集群1");
-//        DatagramSocket socket = me.getDatagramSocket();
-//        List<Cluster> clusters = new ArrayList<>();
-//        //state listening
-//        MainHostReciver.ListenProbeThread change =
-//                new MainHostReciver.ListenProbeThread(me, socket, clusters);
-//        new Thread(change).start();
-
-//        timer.scheduleAtFixedRate(MainHostReciver.timerCheckState, 0, 1000 * MainHostReciver.SecondToOffline);
-//        en.queryAllHost(socket);
-//        clusters.stream().forEach(System.out::println);
-
     }
 
     public Client initClient() throws Exception {

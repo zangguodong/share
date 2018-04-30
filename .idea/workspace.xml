@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="526ebfa5-ddad-462d-bd22-0704c95676e2" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/kotlinc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Test.java" afterPath="$PROJECT_DIR$/src/Test.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ClientEntry.java" afterPath="$PROJECT_DIR$/src/ClientEntry.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -63,12 +60,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TCPServerSocketHandler.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="TCPServerSocketHandler.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/TCPServerSocketHandler.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="30">
               <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ClientEntry.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/ClientEntry.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="111">
+              <caret line="23" column="8" lean-forward="false" selection-start-line="23" selection-start-column="8" selection-end-line="23" selection-end-column="8" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -123,12 +132,12 @@
         <option value="$PROJECT_DIR$/src/MainJFrame.java" />
         <option value="$PROJECT_DIR$/src/MainHostReciver.java" />
         <option value="$PROJECT_DIR$/src/Cluster.java" />
-        <option value="$PROJECT_DIR$/src/ClientEntry.java" />
         <option value="$PROJECT_DIR$/src/ClusterMainFrame.java" />
         <option value="$PROJECT_DIR$/src/HostListJFrame.java" />
         <option value="$PROJECT_DIR$/src/Client.java" />
         <option value="$PROJECT_DIR$/src/LoginFrame.java" />
         <option value="$PROJECT_DIR$/src/Test.java" />
+        <option value="$PROJECT_DIR$/src/ClientEntry.java" />
       </list>
     </option>
   </component>
@@ -756,7 +765,7 @@
       <workItem from="1524722812165" duration="15329000" />
       <workItem from="1524750209843" duration="3712000" />
       <workItem from="1524785752171" duration="12288000" />
-      <workItem from="1525107630699" duration="110000" />
+      <workItem from="1525107630699" duration="162000" />
     </task>
     <servers />
   </component>
@@ -775,7 +784,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="31439000" />
+    <option name="totallyTimeSpent" value="31491000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="716" extended-state="6" />
@@ -945,6 +954,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="46">
           <caret line="4" column="17" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="17" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1006,6 +1018,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="23">
           <caret line="4" column="17" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="17" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1069,38 +1084,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ClientEntry.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="19" column="12" lean-forward="true" selection-start-line="19" selection-start-column="12" selection-end-line="19" selection-end-column="12" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#270#299#0" expanded="true" />
-            <element signature="e#270#316#0" expanded="true" />
-            <element signature="e#468#503#1" expanded="true" />
-            <element signature="e#512#540#1" expanded="true" />
-            <element signature="e#1291#1315#1" expanded="true" />
-            <element signature="e#1324#1383#0" expanded="true" />
-            <element signature="e#1336#1365#0" expanded="true" />
-            <element signature="e#1336#1382#0" expanded="true" />
-            <element signature="e#1324#1383#0" expanded="true" />
-            <element signature="e#1393#1429#0" expanded="true" />
-            <element signature="e#1393#1429#0" expanded="true" />
-            <element signature="e#1439#1454#0" expanded="true" />
-            <element signature="e#1439#1454#0" expanded="true" />
-            <element signature="e#1576#1630#1" expanded="true" />
-            <element signature="e#1589#1617#0" expanded="true" />
-            <element signature="e#1589#1617#0" expanded="true" />
-            <element signature="e#1588#1629#0" expanded="true" />
-            <element signature="e#1639#1693#1" expanded="true" />
-            <element signature="e#1702#1718#0" expanded="true" />
-            <element signature="e#1702#1718#0" expanded="true" />
-            <element signature="e#1728#1774#0" expanded="true" />
-            <element signature="e#1728#1774#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Client.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
@@ -1140,6 +1123,16 @@
         <state relative-caret-position="30">
           <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ClientEntry.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="111">
+          <caret line="23" column="8" lean-forward="false" selection-start-line="23" selection-start-column="8" selection-end-line="23" selection-end-column="8" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
