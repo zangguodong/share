@@ -9,5 +9,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="junit:junit:4.12" level="application" />
     <orderEntry type="library" exported="" name="org.codehaus.jackson:jackson-mapper-lgpl:1.9.13" level="application" />
+    <orderEntry type="library" name="org.codehaus.jackson:jackson-mapper-lgpl:1.9.9" level="project" />
   </component>
 </module>

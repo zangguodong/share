@@ -135,7 +135,7 @@ class ListClientPanel extends JPanel {
                             if ((s = me.getSocketMap().get(mainHost)) == null) {
                                 s = new Socket(InetAddress.getByName(mainHost), 7500);
                             }
-                            BufferedWriter bw=new BufferedWriter(new OutputStreamWriter(s.getOutputStream()));
+                            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(s.getOutputStream()));
                             bw.write("update#" + jta.getText());
                             bw.flush();
                             bw.close();
