@@ -20,21 +20,19 @@ public class ClientEntry {
         Client me = en.initClient();
         me.setBaseContent("are you ok?");
         Cluster fakeC = new Cluster("maybe good");
+        fakeC.setHost("192.168.1.104");
         Client ck = new Client("192.168.1.103", "what do you want");
         ck.setCluster(fakeC);
         ck.setClusterName(fakeC.getClusterName());
         ck.setHost(false);
         List<Client> fakeList = Arrays.asList(ck,
-                new Client("192.168.1.120", "i dont want anything"), me);
+                new Client("192.168.1.132", "i don't want anything"), me);
         fakeC.getLoginList().addAll(fakeList);
-        fakeC.setHost(me.getIpAddr());
         me.setCluster(fakeC);
         me.setClusterName(fakeC.getClusterName());
         LoginFrame lf = new LoginFrame(me);
         me.setLf(lf);
-        SwingUtilities.invokeLater(() -> {
-            lf.showLoginFrame();
-        });
+        SwingUtilities.invokeLater(lf::showLoginFrame);
 
     }
 

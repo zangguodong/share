@@ -4,7 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class LoginFrame extends JFrame {
     public Client me;
@@ -52,13 +54,14 @@ public class LoginFrame extends JFrame {
                 me.setClusterName(c.getClusterName());
                 me.setCluster(c);
                 c.setCreateTime(LocalDateTime.now());
-                List<Client> list = Arrays.asList(me);
+                Map<String, String> map = new HashMap<>();
+                map.put(me.getIpAddr(), me.getBaseContent());
                 c.getLoginList().add(me);
                 try {
-                    HostListJFrame hf = new HostListJFrame();
+                    HostListJFrame hf = new HostListJFrame(me);
                     SwingUtilities.invokeLater(() -> {
                         try {
-                            hf.showClusterContent(list);
+                            hf.showClusterContent(map);
                         } catch (Exception e1) {
                             e1.printStackTrace();
                         }
@@ -85,10 +88,14 @@ public class LoginFrame extends JFrame {
                 return;
             }
             List<Client> list = c.getLoginList();
+            Map<String, String> map = new HashMap<>();
+            list.stream().forEach(ma -> {
+                map.put(ma.getIpAddr(), ma.getBaseContent());
+            });
             try {
-                hf = new HostListJFrame();
+                hf = new HostListJFrame(me);
                 SwingUtilities.invokeLater(() -> {
-                    hf.showClusterContent(list);
+                    hf.showClusterContent(map);
                 });
             } catch (Exception e1) {
                 e1.printStackTrace();
@@ -97,6 +104,23 @@ public class LoginFrame extends JFrame {
     }
 
     class searchClusterAction implements ActionListener {
+        private String serializeClientList(List<Client> cli) {
+            StringBuilder bu = new StringBuilder(Math.max(cli.size() * 10, 20));
+            cli.stream().forEach((k -> {
+                bu.append(k.getIpAddr()).append("#").append(k.getBaseContent()).append("@");
+            }));
+            bu.deleteCharAt(bu.length() - 1);
+            return bu.toString();
+        }
+
+        private Map<String, String> derializeClientList(String s) {
+            String[] strs = s.split("@");
+            Map<String, String> map = new HashMap<>();
+            for (int i = 0; i < strs.length; i += 2) {
+                map.put(strs[0], strs[1]);
+            }
+            return map;
+        }
 
         @Override
         public void actionPerformed(ActionEvent e) {
