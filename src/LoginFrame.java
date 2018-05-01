@@ -16,7 +16,7 @@ import java.util.Map;
 public class LoginFrame extends JFrame {
     public Client me;
 
-    public void updateHostListPanel(String ip, String cont) {
+    public void updateHostListPanel(String ip, String cont) throws Exception {
         if (this.hf != null) hf.updatePanel(ip, cont);
     }
 
@@ -132,10 +132,20 @@ public class LoginFrame extends JFrame {
                 System.out.println(bu.toString());
                 bu.deleteCharAt(bu.length()-1);
                 bf.close();
+                socket.close();
                 Map<String,String> map=Util.derializeClientList(bu.toString());
-                System.out.println(map.size());
                 HostListJFrame hf=new HostListJFrame(me);
                 hf.showClusterContent(map);
+                if(!map.containsKey(me.getIpAddr())){
+                    int ans=JOptionPane.showConfirmDialog(null,"是否愿意加入群组?");
+                    if(ans==2){
+                        socket=new Socket(target.getHostAddress(), 7500);
+                        socket.getOutputStream().write(("login#"+me.getBaseContent()).getBytes());
+                        socket.getOutputStream().flush();
+                        socket.shutdownOutput();
+
+                    }
+                }
 
             } catch (Exception e1) {
                 JOptionPane.showMessageDialog(null, "IP格式错误");
