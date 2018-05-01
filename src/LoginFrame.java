@@ -111,26 +111,35 @@ public class LoginFrame extends JFrame {
     class searchClusterAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            String ip = JOptionPane.showInputDialog("输入目标节点IP", "192.168.1.120");
+            String ip = JOptionPane.showInputDialog("输入目标节点IP", "192.168.1.104");
             try {
                 InetAddress target = InetAddress.getByName(ip);
                 Socket socket;
-                if ((socket = me.getSocketMap().get(ip)) != null) {
-                    socket = new Socket(target.getHostAddress(), 7500);
-                    if (socket.isConnected()) me.getSocketMap().put(ip, socket);
-                }
+//                if ((socket = me.getSocketMap().getOrDefault(ip, null)) == null) {
+                socket = new Socket(target.getHostAddress(), 7500);
+//                    if (socket.isConnected()) me.getSocketMap().put(ip, socket);
+//                }
                 socket.getOutputStream().write(EFunction.SearchGroup.name().getBytes());
                 socket.getOutputStream().flush();
                 socket.shutdownOutput();
                 InputStream in = socket.getInputStream();
                 BufferedReader bf = new BufferedReader(new InputStreamReader(in));
+                StringBuilder bu=new StringBuilder();
                 String s;
                 while ((s = bf.readLine()) != null) {
-                    System.out.println(s);
+                    bu.append(s).append("\n");
                 }
+                System.out.println(bu.toString());
+                bu.deleteCharAt(bu.length()-1);
+                bf.close();
+                Map<String,String> map=Util.derializeClientList(bu.toString());
+                System.out.println(map.size());
+                HostListJFrame hf=new HostListJFrame(me);
+                hf.showClusterContent(map);
+
             } catch (Exception e1) {
                 JOptionPane.showMessageDialog(null, "IP格式错误");
-                actionPerformed(e);
+                System.out.println(e1.getMessage());
             }
         }
     }

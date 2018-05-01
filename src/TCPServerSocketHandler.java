@@ -43,9 +43,10 @@ public class TCPServerSocketHandler implements Runnable {
                         sendString(socket, "not host,do you want to check on " +
                                 me.getCluster().getHost());
                     //TODO make some date
-                    String toSend="";
+                    String toSend = Util.serializeClientList(me.getCluster().getLoginList());
                     socket.getOutputStream().write(toSend.getBytes());
                     socket.getOutputStream().flush();
+                    System.out.println("send data search group " + toSend);
                     break;
                 }
                 case ping: {

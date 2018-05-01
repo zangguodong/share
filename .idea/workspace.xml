@@ -2,36 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="526ebfa5-ddad-462d-bd22-0704c95676e2" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/ShareContent/HostListJFrame$ListClientPanel$viewJButton$Showlistener.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/ShareContent/HostListJFrame$ListClientPanel$viewJButton.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/ShareContent/HostListJFrame$ListClientPanel.class" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/ShareContent/ClusterMainFrame.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/ShareContent/ClusterPanel$CreateClusterAction.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/ShareContent/ClusterPanel$ScrollPanel.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/ShareContent/ClusterPanel$expandClusterAction.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/ShareContent/ClusterPanel$loginClusterAction.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/ShareContent/ClusterPanel.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/ShareContent/ListClientPanel$viewJButton$Showlistener.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/ShareContent/ListClientPanel$viewJButton.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/ShareContent/ListClientPanel.class" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ShareContent/Client.class" afterPath="$PROJECT_DIR$/out/production/ShareContent/Client.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ShareContent/ClientEntry.class" afterPath="$PROJECT_DIR$/out/production/ShareContent/ClientEntry.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ShareContent/HostListJFrame.class" afterPath="$PROJECT_DIR$/out/production/ShareContent/HostListJFrame.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ShareContent/LoginFrame$LoginPanel.class" afterPath="$PROJECT_DIR$/out/production/ShareContent/LoginFrame$LoginPanel.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ShareContent/HostListJFrame$ListClientPanel$viewJButton$Showlistener.class" afterPath="$PROJECT_DIR$/out/production/ShareContent/HostListJFrame$ListClientPanel$viewJButton$Showlistener.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ShareContent/LoginFrame$checkClusterAction.class" afterPath="$PROJECT_DIR$/out/production/ShareContent/LoginFrame$checkClusterAction.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ShareContent/LoginFrame$createClusterAction.class" afterPath="$PROJECT_DIR$/out/production/ShareContent/LoginFrame$createClusterAction.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ShareContent/LoginFrame$searchClusterAction.class" afterPath="$PROJECT_DIR$/out/production/ShareContent/LoginFrame$searchClusterAction.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ShareContent/LoginFrame.class" afterPath="$PROJECT_DIR$/out/production/ShareContent/LoginFrame.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ShareContent/MainHostReciver$1.class" afterPath="$PROJECT_DIR$/out/production/ShareContent/MainHostReciver$1.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ShareContent/TCPServerSocketHandler.class" afterPath="$PROJECT_DIR$/out/production/ShareContent/TCPServerSocketHandler.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ShareContent/Test.class" afterPath="$PROJECT_DIR$/out/production/ShareContent/Test.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ShareContent/Util.class" afterPath="$PROJECT_DIR$/out/production/ShareContent/Util.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ClientEntry.java" afterPath="$PROJECT_DIR$/src/ClientEntry.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ClusterMainFrame.java" afterPath="$PROJECT_DIR$/src/ClusterMainFrame.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/HostListJFrame.java" afterPath="$PROJECT_DIR$/src/HostListJFrame.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/LoginFrame.java" afterPath="$PROJECT_DIR$/src/LoginFrame.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Test.java" afterPath="$PROJECT_DIR$/src/Test.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/TCPServerSocketHandler.java" afterPath="$PROJECT_DIR$/src/TCPServerSocketHandler.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Util.java" afterPath="$PROJECT_DIR$/src/Util.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -45,15 +24,39 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="LoginFrame.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="LoginFrame.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/LoginFrame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="15" column="13" lean-forward="false" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+            <state relative-caret-position="281">
+              <caret line="135" column="47" lean-forward="true" selection-start-line="135" selection-start-column="47" selection-end-line="135" selection-end-column="47" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <marker date="1525131775000" expanded="true" signature="4653:4813" ph="{...}" />
-                <marker date="1525131775000" expanded="true" signature="4653:4819" ph="{...}" />
+                <element signature="e#513#514#0" expanded="true" />
+                <element signature="e#574#575#0" expanded="true" />
+                <element signature="e#610#611#0" expanded="true" />
+                <element signature="e#638#639#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Util.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Util.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="235">
+              <caret line="54" column="9" lean-forward="true" selection-start-line="54" selection-start-column="9" selection-end-line="54" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TCPServerSocketHandler.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/TCPServerSocketHandler.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="384">
+              <caret line="42" column="20" lean-forward="true" selection-start-line="42" selection-start-column="20" selection-end-line="42" selection-end-column="20" />
+              <folding>
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -95,7 +98,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="HostListJFrame.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="HostListJFrame.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/HostListJFrame.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="360">
@@ -114,16 +117,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EFunction.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/EFunction.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="12" lean-forward="false" selection-start-line="0" selection-start-column="12" selection-end-line="0" selection-end-column="12" />
               <folding />
             </state>
           </provider>
@@ -180,12 +173,12 @@
         <option value="$PROJECT_DIR$/src/Client.java" />
         <option value="$PROJECT_DIR$/src/EFunction.java" />
         <option value="$PROJECT_DIR$/src/Test.java" />
-        <option value="$PROJECT_DIR$/src/LoginFrame.java" />
-        <option value="$PROJECT_DIR$/src/Util.java" />
         <option value="$PROJECT_DIR$/src/TCPServerSocketHandler.java" />
         <option value="$PROJECT_DIR$/src/ClientEntry.java" />
-        <option value="$PROJECT_DIR$/.idea/workspace.xml" />
         <option value="$PROJECT_DIR$/src/HostListJFrame.java" />
+        <option value="$PROJECT_DIR$/.idea/workspace.xml" />
+        <option value="$PROJECT_DIR$/src/Util.java" />
+        <option value="$PROJECT_DIR$/src/LoginFrame.java" />
       </list>
     </option>
   </component>
@@ -842,12 +835,12 @@
       <workItem from="1524722812165" duration="15329000" />
       <workItem from="1524750209843" duration="3712000" />
       <workItem from="1524785752171" duration="12288000" />
-      <workItem from="1525107630699" duration="3118000" />
+      <workItem from="1525107630699" duration="5100000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="34447000" />
+    <option name="totallyTimeSpent" value="36429000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="22" y="23" width="1280" height="716" extended-state="0" />
@@ -969,8 +962,10 @@
           <caret line="100" column="17" lean-forward="true" selection-start-line="100" selection-start-column="17" selection-end-line="100" selection-end-column="17" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1525131775000" expanded="true" signature="4653:4813" ph="{...}" />
-            <marker date="1525131775000" expanded="true" signature="4653:4819" ph="{...}" />
+            <element signature="e#513#514#0" expanded="true" />
+            <element signature="e#574#575#0" expanded="true" />
+            <element signature="e#610#611#0" expanded="true" />
+            <element signature="e#638#639#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1112,28 +1107,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Util.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="235">
-          <caret line="38" column="1" lean-forward="true" selection-start-line="38" selection-start-column="1" selection-end-line="38" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/TCPServerSocketHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="44" column="27" lean-forward="false" selection-start-line="44" selection-start-column="27" selection-end-line="44" selection-end-column="27" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3025#3026#0" expanded="true" />
-            <element signature="e#3050#3051#0" expanded="true" />
-            <element signature="e#3094#3095#0" expanded="true" />
-            <element signature="e#3122#3123#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/SocketTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
@@ -1148,18 +1121,6 @@
           <caret line="75" column="17" lean-forward="false" selection-start-line="75" selection-start-column="17" selection-end-line="75" selection-end-column="17" />
           <folding>
             <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/LoginFrame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="13" lean-forward="false" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <marker date="1525131775000" expanded="true" signature="4653:4813" ph="{...}" />
-            <marker date="1525131775000" expanded="true" signature="4653:4819" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1228,14 +1189,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="309">
-          <caret line="58" column="20" lean-forward="false" selection-start-line="58" selection-start-column="20" selection-end-line="58" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/HostListJFrame.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
@@ -1244,6 +1197,46 @@
             <element signature="imports" expanded="true" />
             <element signature="e#3234#3235#0" expanded="true" />
             <element signature="e#3275#3276#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="309">
+          <caret line="58" column="19" lean-forward="false" selection-start-line="58" selection-start-column="19" selection-end-line="58" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Util.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="235">
+          <caret line="54" column="9" lean-forward="true" selection-start-line="54" selection-start-column="9" selection-end-line="54" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/TCPServerSocketHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="384">
+          <caret line="42" column="20" lean-forward="true" selection-start-line="42" selection-start-column="20" selection-end-line="42" selection-end-column="20" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/LoginFrame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="281">
+          <caret line="135" column="47" lean-forward="true" selection-start-line="135" selection-start-column="47" selection-end-line="135" selection-end-column="47" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#513#514#0" expanded="true" />
+            <element signature="e#574#575#0" expanded="true" />
+            <element signature="e#610#611#0" expanded="true" />
+            <element signature="e#638#639#0" expanded="true" />
           </folding>
         </state>
       </provider>
