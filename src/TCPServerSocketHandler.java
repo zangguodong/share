@@ -39,14 +39,13 @@ public class TCPServerSocketHandler implements Runnable {
                     break;
                 }
                 case SearchGroup: {
-                    if (!me.isHost())
-                        sendString(socket, "not host,do you want to check on " +
-                                me.getCluster().getHost());
-                    //TODO make some date
+                    //if (!me.isHost())
+                      //  sendString(socket, "not host,do you want to check on " +me.getCluster().getHost());
                     String toSend = Util.serializeClientList(me.getCluster().getLoginList());
                     socket.getOutputStream().write(toSend.getBytes());
                     socket.getOutputStream().flush();
-                    System.out.println("send data search group " + toSend);
+                    socket.shutdownOutput();
+                    System.out.println("send data -------------->" + toSend);
                     break;
                 }
                 case ping: {
