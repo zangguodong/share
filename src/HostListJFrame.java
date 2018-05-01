@@ -71,13 +71,8 @@ public class HostListJFrame extends JFrame {
         }
 
         public void update(String ip, String text) throws Exception {
-            //c.setBaseContent(text);
             if (!ipLabelmap.containsKey(ip)) {
                 ipLabelmap.put(ip, new JLabel());
-                ipLabelmap.get(ip).setText("<html><body>" + ip + "<br>" + "<br>"
-                        + text.substring(0, Math.min(10, text.length())) + "..."
-                        + "<body></html>");
-
                 viewJButton tmpbutt;
                 if (!ip.equals(Util.getLocalHostLANAddress().getHostAddress())) {
                     tmpbutt = new viewJButton("查看", ip, text, false);
@@ -85,13 +80,13 @@ public class HostListJFrame extends JFrame {
                 this.add(ipLabelmap.get(ip));
                 this.add(tmpbutt);
                 ipButtonmap.put(ip, tmpbutt);
-                updateUI();
-            } else {
-                ipLabelmap.get(ip).setText("<html><body>" + ip + "<br>" + "<br>"
-                        + text.substring(0, Math.min(10, text.length())) + "..."
-                        + "<body></html>");
             }
-
+            ipLabelmap.get(ip).setText("<html><body>" + ip + "<br>" + "<br>"
+                    + text.substring(0, Math.min(10, text.length())) + "..."
+                    + "<body></html>");
+            ipButtonmap.get(ip).setBase(text);
+            ipButtonmap.get(ip).updateJTAFromBase();
+            updateUI();
         }
 
         private class viewJButton extends JButton {
@@ -112,22 +107,36 @@ public class HostListJFrame extends JFrame {
                 return ip;
             }
 
+            public String getBase() {
+                return base;
+            }
+
+            public void setBase(String base) {
+                this.base = base;
+            }
+
+            private void updateJTAFromBase() {
+                if(sl.getJTA()!=null)sl.getJTA().setText(base);
+            }
+
             class Showlistener implements ActionListener {
                 private boolean canedit;
                 private String ip;
                 private String base;
-
+                public JTextArea getJTA(){return jta;}
                 Showlistener(boolean edit, String ip, String base) {
                     this.canedit = edit;
                     this.ip = ip;
                     this.base = base;
                 }
 
+                JTextArea jta;
+
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     JFrame jf = new JFrame();
                     JPanel jp = new JPanel();
-                    JTextArea jta = new JTextArea(8, 40);
+                    jta = new JTextArea(8, 40);
                     jta.setTabSize(8);
                     jta.setLineWrap(true);
                     jta.setWrapStyleWord(true);

@@ -34,6 +34,8 @@ public class TCPServerSocketHandler implements Runnable {
                     String src = socket.getInetAddress().getHostAddress().trim();
                     //非主机，仅将自己同步
                     me.getCluster().getLoginList().stream().filter(e -> e.getIpAddr().equals(src)).forEach(a -> a.setBaseContent(content));
+                    me.getCluster().getLoginList().stream().filter(e -> e.getIpAddr().equals(src)).forEach(a -> System.out.println("we find " + a.getBaseContent()));
+
                     me.getLf().updateHostListPanel(src, content);
                     if (me.isHost()) {
 
@@ -47,12 +49,11 @@ public class TCPServerSocketHandler implements Runnable {
                     List<Client> list = me.getCluster().getLoginList();
                     boolean exist = list.stream().anyMatch(e -> e.getIpAddr().equals(ip));
                     if (!exist) {
+                        System.out.println("we add data to List");
                         list.add(tmp);
                     }
                     //synchronize other machine
                     me.getLf().hf.updatePanel(ip, content);
-                    me.getLf().hf.repaint();
-
                 }
                 case SearchGroup: {
 //                    if (!me.isHost())
