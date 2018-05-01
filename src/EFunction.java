@@ -5,5 +5,7 @@ public enum EFunction {
     probeRes,//UDP
     update,//TCP
     SearchGroup,//TCP
+    login,
+    loginDone,
     Unknown
 }

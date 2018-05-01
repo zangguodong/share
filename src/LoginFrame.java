@@ -16,7 +16,7 @@ import java.util.Map;
 public class LoginFrame extends JFrame {
     public Client me;
 
-    public void updateHostListPanel(String ip, String cont) {
+    public void updateHostListPanel(String ip, String cont) throws Exception {
         if (this.hf != null) hf.updatePanel(ip, cont);
     }
 
@@ -115,20 +115,38 @@ public class LoginFrame extends JFrame {
             try {
                 InetAddress target = InetAddress.getByName(ip);
                 Socket socket;
-                if ((socket = me.getSocketMap().getOrDefault(ip, null)) == null) {
-                    socket = new Socket(target.getHostAddress(), 7500);
-                    if (socket.isConnected()) me.getSocketMap().put(ip, socket);
-                }
+//                if ((socket = me.getSocketMap().getOrDefault(ip, null)) == null) {
+                socket = new Socket(target.getHostAddress(), 7500);
+//                    if (socket.isConnected()) me.getSocketMap().put(ip, socket);
+//                }
                 socket.getOutputStream().write(EFunction.SearchGroup.name().getBytes());
                 socket.getOutputStream().flush();
                 socket.shutdownOutput();
                 InputStream in = socket.getInputStream();
                 BufferedReader bf = new BufferedReader(new InputStreamReader(in));
+                StringBuilder bu=new StringBuilder();
                 String s;
                 while ((s = bf.readLine()) != null) {
-                    System.out.println(s);
+                    bu.append(s).append("\n");
                 }
+                System.out.println(bu.toString());
+                bu.deleteCharAt(bu.length()-1);
                 bf.close();
+                socket.close();
+                Map<String,String> map=Util.derializeClientList(bu.toString());
+                HostListJFrame hf=new HostListJFrame(me);
+                hf.showClusterContent(map);
+                if(!map.containsKey(me.getIpAddr())){
+                    int ans=JOptionPane.showConfirmDialog(null,"是否愿意加入群组?");
+                    if(ans==2){
+                        socket=new Socket(target.getHostAddress(), 7500);
+                        socket.getOutputStream().write(("login#"+me.getBaseContent()).getBytes());
+                        socket.getOutputStream().flush();
+                        socket.shutdownOutput();
+
+                    }
+                }
+
             } catch (Exception e1) {
                 JOptionPane.showMessageDialog(null, "IP格式错误");
                 System.out.println(e1.getMessage());

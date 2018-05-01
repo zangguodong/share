@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.Socket;
+import java.util.List;
 
 public class TCPServerSocketHandler implements Runnable {
     private Client me;
@@ -25,6 +26,7 @@ public class TCPServerSocketHandler implements Runnable {
             bu.deleteCharAt(bu.length() - 1);
             System.out.println("get data ------------------>" + bu.toString());
             EFunction ef = checkState(bu.toString());
+            String ip = socket.getInetAddress().getHostAddress();
             socket.shutdownInput();
             switch (ef) {
                 case update: {
@@ -38,9 +40,25 @@ public class TCPServerSocketHandler implements Runnable {
                     }
                     break;
                 }
+                case login: {
+                    String content = bu.substring(6);
+                    Client tmp = new Client(ip, content);
+                    tmp.setCluster(me.getCluster());
+                    List<Client> list = me.getCluster().getLoginList();
+                    boolean exist = list.stream().anyMatch(e -> e.getIpAddr().equals(ip));
+                    if (!exist) {
+                        list.add(tmp);
+                    }
+                    //synchronize other machine
+                    me.getLf().hf.updatePanel(ip, content);
+                    me.getLf().hf.repaint();
+
+                }
                 case SearchGroup: {
-                    //if (!me.isHost())
-                      //  sendString(socket, "not host,do you want to check on " +me.getCluster().getHost());
+//                    if (!me.isHost())
+//                        sendString(socket, "not host,do you want to check on " +
+//                                me.getCluster().getHost());
+                    //TODO make some date
                     String toSend = Util.serializeClientList(me.getCluster().getLoginList());
                     socket.getOutputStream().write(toSend.getBytes());
                     socket.getOutputStream().flush();
@@ -61,6 +79,8 @@ public class TCPServerSocketHandler implements Runnable {
             }
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
     }
@@ -75,6 +95,8 @@ public class TCPServerSocketHandler implements Runnable {
         else if (s.startsWith(EFunction.ping.name())) return EFunction.ping;
         else if (s.startsWith(EFunction.pong.name())) return EFunction.pong;
         else if (s.startsWith(EFunction.SearchGroup.name())) return EFunction.SearchGroup;
+        else if (s.startsWith(EFunction.login.name() + "#")) return EFunction.login;
+        else if (s.startsWith(EFunction.loginDone.name() + "#")) return EFunction.loginDone;
         else return EFunction.Unknown;
     }
 

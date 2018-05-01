@@ -49,8 +49,9 @@ public class Util {
     public static Map<String, String> derializeClientList(String s) {
         String[] strs = s.split("@");
         Map<String, String> map = new HashMap<>();
-        for (int i = 0; i < strs.length; i += 2) {
-            map.put(strs[0], strs[1]);
+        for (int i = 0; i < strs.length; i += 1) {
+            String tmp=strs[i];
+            map.put(tmp.split("#")[0],tmp.split("#")[1]);
         }
         return map;
     }

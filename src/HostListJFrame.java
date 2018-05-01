@@ -34,7 +34,11 @@ public class HostListJFrame extends JFrame {
         }
     }
 
-    public void updatePanel(String ip, String text) {
+    public void addNewComponent(String ip, String cont) {
+
+    }
+
+    public void updatePanel(String ip, String text) throws Exception {
 
         this.lp.update(ip, text);
     }
@@ -66,11 +70,28 @@ public class HostListJFrame extends JFrame {
 
         }
 
-        public void update(String ip, String text) {
+        public void update(String ip, String text) throws Exception {
             //c.setBaseContent(text);
-            ipLabelmap.get(ip).setText("<html><body>" + ip + "<br>" + "<br>"
-                    + text.substring(0, Math.min(10, text.length())) + "..."
-                    + "<body></html>");
+            if (!ipLabelmap.containsKey(ip)) {
+                ipLabelmap.put(ip, new JLabel());
+                ipLabelmap.get(ip).setText("<html><body>" + ip + "<br>" + "<br>"
+                        + text.substring(0, Math.min(10, text.length())) + "..."
+                        + "<body></html>");
+
+                viewJButton tmpbutt;
+                if (!ip.equals(Util.getLocalHostLANAddress().getHostAddress())) {
+                    tmpbutt = new viewJButton("查看", ip, text, false);
+                } else tmpbutt = new viewJButton("编辑", ip, text, true);
+                this.add(ipLabelmap.get(ip));
+                this.add(tmpbutt);
+                ipButtonmap.put(ip, tmpbutt);
+                updateUI();
+            } else {
+                ipLabelmap.get(ip).setText("<html><body>" + ip + "<br>" + "<br>"
+                        + text.substring(0, Math.min(10, text.length())) + "..."
+                        + "<body></html>");
+            }
+
         }
 
         private class viewJButton extends JButton {
@@ -123,7 +144,11 @@ public class HostListJFrame extends JFrame {
                             System.out.println("mainHost " + mainHost);
                             if (mainHost.equals(me.getIpAddr())) {
                                 me.getCluster().getLoginList().stream().filter(ce -> ce.getIpAddr().equals(me.getIpAddr())).forEach(ca -> ca.setBaseContent(me.getBaseContent()));
-                                me.getLf().updateHostListPanel(me.getIpAddr(), me.getBaseContent());
+                                try {
+                                    me.getLf().updateHostListPanel(me.getIpAddr(), me.getBaseContent());
+                                } catch (Exception e1) {
+                                    e1.printStackTrace();
+                                }
                                 return;
                             }
                             Socket s;
@@ -140,6 +165,7 @@ public class HostListJFrame extends JFrame {
                             } catch (Exception e1) {
                                 e1.printStackTrace();
                             }
+
                             //TODO notify all other host
 
 
