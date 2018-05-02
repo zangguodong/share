@@ -7,5 +7,6 @@ public enum EFunction {
     SearchGroup,//TCP
     login,
     loginDone,
+    rechoose,
     Unknown
 }

@@ -35,15 +35,13 @@ public class TCPServerSocketHandler implements Runnable {
                     String src = socket.getInetAddress().getHostAddress().trim();
                     //非主机，仅将自己同步
                     me.getCluster().getLoginList().stream().filter(e -> e.getIpAddr().equals(src)).forEach(a -> a.setBaseContent(content));
-                    me.getCluster().getLoginList().stream().filter(e -> e.getIpAddr().equals(src)).forEach(a -> System.out.println("we find " + a.getBaseContent()));
-
                     me.getLf().updateHostListPanel(src, content);
                     if (me.isHost()) {
                         for (Client c : me.getCluster().getLoginList()) {
                             if (c.getIpAddr().equals(me.getIpAddr()) ||
                                     c.getIpAddr().equals(src)) continue;
                             Socket st = new Socket(InetAddress.getByName(c.getIpAddr()), 5000);
-                            st.getOutputStream().write(("update#" + content).getBytes());
+                            st.getOutputStream().write((EFunction.update.name() + "#" + content).getBytes());
                             st.getOutputStream().flush();
                             st.shutdownOutput();
                             st.close();
@@ -86,6 +84,23 @@ public class TCPServerSocketHandler implements Runnable {
 
                     break;
                 }
+                case rechoose: {
+                    String content = bu.substring(9);
+                    System.out.println("accept ip " + content + " we will set it as server");
+                    if (content.equals(me.getIpAddr())) me.setHost(true);
+                    String rawIp = me.getCluster().getHost();
+                    me.getCluster().setHost(content);
+                    int i = -1;
+                    List<Client> list = me.getCluster().getLoginList();
+                    for (int k = 0; k < list.size(); k++) {
+                        if (list.get(k).getIpAddr().equals(rawIp))
+                            i = k;
+                    }
+                    if (i >= 0) {
+                        list.remove(i);
+                    }
+                    break;
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -107,6 +122,7 @@ public class TCPServerSocketHandler implements Runnable {
         else if (s.startsWith(EFunction.SearchGroup.name())) return EFunction.SearchGroup;
         else if (s.startsWith(EFunction.login.name() + "#")) return EFunction.login;
         else if (s.startsWith(EFunction.loginDone.name() + "#")) return EFunction.loginDone;
+        else if (s.startsWith(EFunction.rechoose.name() + "#")) return EFunction.rechoose;
         else return EFunction.Unknown;
     }
 

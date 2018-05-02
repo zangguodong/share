@@ -89,6 +89,36 @@ public class HostListJFrame extends JFrame {
             updateUI();
         }
 
+        public void rechooseServer() {
+            String rawServer = me.getCluster().getHost();
+            Client t = null;
+            for (Client c : me.getCluster().getLoginList()) {
+                if (c.getIpAddr().equals(rawServer)) {
+                    t = c;
+                    break;
+                }
+            }
+            me.getCluster().getLoginList().remove(t);
+            if (me.getCluster().getLoginList().size() <= 0) me.getCluster().getLoginList().add(me);
+            String newServ = me.getCluster().getLoginList().get(0).getIpAddr();
+            Socket s;
+            for (Client c : me.getCluster().getLoginList()) {
+                String ip = c.getIpAddr();
+                try {
+                    s = new Socket(InetAddress.getByName(ip), 7500);
+                    s.getOutputStream().write((EFunction.rechoose.name() + "#" + newServ).getBytes());
+                    s.getOutputStream().flush();
+                    System.out.println(me.getIpAddr() + " will sendData " + EFunction.rechoose.name() + "#" + newServ);
+                    s.shutdownOutput();
+                    s.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    rechooseServer();
+                }
+
+            }
+        }
+
         private class viewJButton extends JButton {
             //private viewJButton(String s){super(s);}
             private String ip;
@@ -116,14 +146,18 @@ public class HostListJFrame extends JFrame {
             }
 
             private void updateJTAFromBase() {
-                if(sl.getJTA()!=null)sl.getJTA().setText(base);
+                if (sl.getJTA() != null) sl.getJTA().setText(base);
             }
 
             class Showlistener implements ActionListener {
                 private boolean canedit;
                 private String ip;
                 private String base;
-                public JTextArea getJTA(){return jta;}
+
+                public JTextArea getJTA() {
+                    return jta;
+                }
+
                 Showlistener(boolean edit, String ip, String base) {
                     this.canedit = edit;
                     this.ip = ip;
@@ -162,22 +196,17 @@ public class HostListJFrame extends JFrame {
                             }
                             Socket s;
                             try {
-                                if ((s = me.getSocketMap().get(mainHost)) == null) {
-                                    s = new Socket(InetAddress.getByName(mainHost), 7500);
-                                    me.getSocketMap().put(mainHost, s);
-                                }
+                                s = new Socket(InetAddress.getByName(mainHost), 7500);
                                 BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(s.getOutputStream()));
-                                bw.write("update#" + jta.getText());
+                                bw.write(EFunction.update.name() + "#" + jta.getText());
                                 bw.flush();
                                 bw.close();
                                 System.out.println("we send data " + "update#" + jta.getText() + " to " + s.getInetAddress().getHostName());
                             } catch (Exception e1) {
+                                rechooseServer();
                                 e1.printStackTrace();
                             }
-
                             //TODO notify all other host
-
-
                         });
                         jp.add(button, BorderLayout.SOUTH);
                     } else {
