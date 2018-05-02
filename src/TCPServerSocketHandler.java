@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.InetAddress;
 import java.net.Socket;
 import java.util.List;
 
@@ -38,7 +39,15 @@ public class TCPServerSocketHandler implements Runnable {
 
                     me.getLf().updateHostListPanel(src, content);
                     if (me.isHost()) {
-
+                        for (Client c : me.getCluster().getLoginList()) {
+                            if (c.getIpAddr().equals(me.getIpAddr()) ||
+                                    c.getIpAddr().equals(src)) continue;
+                            Socket st = new Socket(InetAddress.getByName(c.getIpAddr()), 5000);
+                            st.getOutputStream().write(("update#" + content).getBytes());
+                            st.getOutputStream().flush();
+                            st.shutdownOutput();
+                            st.close();
+                        }
                     }
                     break;
                 }
