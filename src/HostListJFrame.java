@@ -6,10 +6,10 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.net.InetAddress;
+import java.net.InetSocketAddress;
 import java.net.Socket;
-import java.net.UnknownHostException;
+import java.net.SocketAddress;
 import java.util.*;
-import java.util.List;
 
 public class HostListJFrame extends JFrame {
     //private List<Client> list;
@@ -101,18 +101,19 @@ public class HostListJFrame extends JFrame {
             me.getCluster().getLoginList().remove(t);
             if (me.getCluster().getLoginList().size() <= 0) me.getCluster().getLoginList().add(me);
             String newServ = me.getCluster().getLoginList().get(0).getIpAddr();
-            Socket s;
+            me.getCluster().setHost(newServ);
+            Socket s = new Socket();
             for (Client c : me.getCluster().getLoginList()) {
                 String ip = c.getIpAddr();
                 try {
-                    s = new Socket(InetAddress.getByName(ip), 7500);
+                    System.out.println(me.getIpAddr() + " will sendData " + EFunction.rechoose.name() + "#" + newServ);
+                    s.connect(new InetSocketAddress(InetAddress.getByName(ip), 7500), 1000);
                     s.getOutputStream().write((EFunction.rechoose.name() + "#" + newServ).getBytes());
                     s.getOutputStream().flush();
-                    System.out.println(me.getIpAddr() + " will sendData " + EFunction.rechoose.name() + "#" + newServ);
                     s.shutdownOutput();
                     s.close();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    System.out.println(c.getIpAddr() + " fail");
                     rechooseServer();
                 }
 
@@ -194,17 +195,20 @@ public class HostListJFrame extends JFrame {
                                 }
                                 return;
                             }
-                            Socket s;
+                            Socket s = new Socket();
                             try {
-                                s = new Socket(InetAddress.getByName(mainHost), 7500);
+                                System.out.println(InetAddress.getByName(mainHost).getHostAddress());
+                                s.connect(new InetSocketAddress(InetAddress.getByName(mainHost), 7500), 1000);
                                 BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(s.getOutputStream()));
                                 bw.write(EFunction.update.name() + "#" + jta.getText());
                                 bw.flush();
                                 bw.close();
                                 System.out.println("we send data " + "update#" + jta.getText() + " to " + s.getInetAddress().getHostName());
                             } catch (Exception e1) {
-                                rechooseServer();
                                 e1.printStackTrace();
+                                System.out.println("we will choose");
+                                rechooseServer();
+
                             }
                             //TODO notify all other host
                         });

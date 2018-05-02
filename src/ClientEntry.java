@@ -18,18 +18,18 @@ public class ClientEntry {
         //5000 port to probe
         ClientEntry en = new ClientEntry();
         Client me = en.initClient();
-        me.setBaseContent("are you ok?");
         Cluster fakeC = new Cluster("maybe good");
-        fakeC.setHost("192.168.1.104");
+        me.setBaseContent("are you ok?");
+        me.setCluster(fakeC);
+        me.setClusterName(fakeC.getClusterName());
         Client ck = new Client("192.168.1.103", "what do you want");
         ck.setCluster(fakeC);
         ck.setClusterName(fakeC.getClusterName());
         ck.setHost(false);
-        List<Client> fakeList = Arrays.asList(ck,
-                new Client("192.168.1.132", "i don't want anything"), me);
+        List<Client> fakeList = Arrays.asList(ck, new Client("192.168.1.132", "i don't want anything"), me);
+        fakeC.setHost(ck.getIpAddr());
         fakeC.getLoginList().addAll(fakeList);
-        me.setCluster(fakeC);
-        me.setClusterName(fakeC.getClusterName());
+
         LoginFrame lf = new LoginFrame(me);
         me.setLf(lf);
         SwingUtilities.invokeLater(lf::showLoginFrame);

@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.InetAddress;
+import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.List;
 
@@ -37,14 +38,20 @@ public class TCPServerSocketHandler implements Runnable {
                     me.getCluster().getLoginList().stream().filter(e -> e.getIpAddr().equals(src)).forEach(a -> a.setBaseContent(content));
                     me.getLf().updateHostListPanel(src, content);
                     if (me.isHost()) {
+                        Socket st = new Socket();
                         for (Client c : me.getCluster().getLoginList()) {
+                            System.out.println("we will send update to " + c.getIpAddr());
                             if (c.getIpAddr().equals(me.getIpAddr()) ||
                                     c.getIpAddr().equals(src)) continue;
-                            Socket st = new Socket(InetAddress.getByName(c.getIpAddr()), 5000);
-                            st.getOutputStream().write((EFunction.update.name() + "#" + content).getBytes());
-                            st.getOutputStream().flush();
-                            st.shutdownOutput();
-                            st.close();
+                            try {
+                                st.connect((new InetSocketAddress(InetAddress.getByName(c.getIpAddr()), 7500)), 500);
+                                st.getOutputStream().write((EFunction.update.name() + "#" + content).getBytes());
+                                st.getOutputStream().flush();
+                                st.shutdownOutput();
+                                st.close();
+                            } catch (IOException e) {
+                                System.out.println("fail connect " + c.getIpAddr());
+                            }
                         }
                     }
                     break;
